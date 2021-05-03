@@ -95,11 +95,11 @@ public class fileDataUtils {
                 break;
             }
         }
-        System.out.println("last pointer " +result);
+//        System.out.println("last pointer " +result);
         long duration = time;
 //        System.out.println(String.format("Inserted %s bytes", (byte_count)));
-        System.out.println("Number of pages: " + page_count);
-        System.out.println("time elapsed for duration: [" + duration+"]");
+        System.out.println("Number of pages(entries): " + page_count);
+        System.out.println("Time used for insertion: [" + duration+"] ms");
 
     }
 
@@ -124,7 +124,7 @@ public class fileDataUtils {
             bplus_tree.search(lst_keys.get(rand_key));
 
         }
-        System.out.println("The average time for 1000 searches is :["+(System.currentTimeMillis()-time)+"]");
+        System.out.println("The average time for 1000 searches is :["+(System.currentTimeMillis()-time)+"] ms");
     }
 
     public void deleteTree(bplus_Tree bplus_tree,int page_size_in_kb, String data_size) throws IOException {
@@ -159,7 +159,7 @@ public class fileDataUtils {
 //                }
 
             }
-            System.out.println("The time for delete is :["+total_time+"]");
+            System.out.println("The time used for deletion is :["+total_time+"] ms");
         }
     }
 

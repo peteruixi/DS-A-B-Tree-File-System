@@ -16,19 +16,28 @@ public class main extends testDataUtils {
 //        int order =32;
 //        for(int i =4; i < 19; i++){
 //            for(int j = 2; j<= 5;j ++){
-                int data_size =  262144;//4*(int)Math.pow(2,i);
-                int order = 32;//(int)Math.pow(2,j);
+            int data_size =  4096;//data size in unit of Kilobytes
+            int order = 8;//value of M
+            bplus_Tree tree = new bplus_Tree(order);
+            fileDataUtils r = new fileDataUtils();
+            System.out.println("Results of B+ tree when m = [%d] when data size is [%d]".formatted(order,data_size));
+            r.readFile(tree,4, String.valueOf(data_size*1024));
+            traverse(tree);
+            Export(tree, tree.getHead());
+            r.deleteTree(tree,4, String.valueOf(data_size*1024));
+            traverse(tree);
+            System.out.println("===================================");
+            System.out.println("Recovering previous tree from file");
+            System.out.println("===================================");
+            Node head = Import();
+            Node root = findRoot(head);
+            bplus_Tree new_tree = new bplus_Tree(order);
+            new_tree.setRoot(root);
+            new_tree.setHead(head);
+            traverse(new_tree);
 
 
 
-                bplus_Tree tree = new bplus_Tree(order);
-                fileDataUtils r = new fileDataUtils();
-                System.out.println("Results of B+ tree when m = [%d] when data size is [%d]".formatted(order,data_size));
-                r.readFile(tree,4, String.valueOf(data_size*1000));
-        Export(tree, tree.getHead());
-                traverse(tree);
-                r.searchTree(tree,4, String.valueOf(data_size*1000));
-                r.deleteTree(tree,4, String.valueOf(data_size*1000));
 //                traverse(tree);
 //
 //            }
@@ -69,18 +78,6 @@ public class main extends testDataUtils {
 
 
 
-    /**
-     * 查询一个 B+ 树上的节点，并返回叶子节点链表的头节点
-     * @param tree
-     * @return
-     */
-    private static Node findOneNode(bplus_Tree tree) {
-        int search = 80;
-        System.out.print(tree.search(search));
-        Node head = tree.getHead();
-        return head;
-    }
-
 
 
 
@@ -107,7 +104,7 @@ public class main extends testDataUtils {
             }
             head = head.getNext();
         }
-       //System.out.println(str.toString());
+       System.out.println(str.toString());
         System.out.println("number of nodes:"+count);
     }
 }

@@ -33,7 +33,7 @@ public class testDataUtils {
     }
 
     public static void Export(bplus_Tree tree, Node head) throws IOException, FileNotFoundException {
-        File file = new File(BASEPATH+String.valueOf(1) + ".txt");
+        File file = new File(BASEPATH+"bplus_tree" + ".txt");
         head.setFile(file);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
         objectOutputStream.writeObject(head);
